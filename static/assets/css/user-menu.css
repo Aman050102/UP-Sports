@@ -1,0 +1,143 @@
+:root {
+    --brand: #8f73dd;
+    --bg: #f3f1fa;
+    --card: #fff;
+    --text: #1b1a21;
+    --muted: #6b657a;
+    --divider: #e7e3ef;
+    --shadow: 0 16px 40px rgba(40, 22, 90, .12);
+}
+
+body {
+    margin: 0;
+    font-family: ui-sans-serif, system-ui, "Noto Sans Thai", Roboto, Arial, sans-serif;
+    color: var(--text);
+    background: linear-gradient(180deg, var(--brand) 0 92px, var(--bg) 92px 100%);
+}
+
+/* header */
+header.topbar {
+    height: 92px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 clamp(16px, 4vw, 32px);
+    color: #fff;
+    font-weight: 800
+}
+
+.brand img {
+    height: 100px;
+    object-fit: contain
+}
+
+.righttools {
+    display: flex;
+    align-items: center;
+    gap: 10px
+}
+
+.user-btn,
+.logout {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border: 1px solid rgba(255, 255, 255, .35);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, .1);
+    color: #fff;
+    text-decoration: none
+}
+
+.user-btn:hover,
+.logout:hover {
+    background: rgba(255, 255, 255, .16);
+    border-color: rgba(255, 255, 255, .6)
+}
+
+/* main */
+main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 24px;
+    display: grid;
+    gap: 24px
+}
+
+.section-title {
+    font-size: 20px;
+    font-weight: 900;
+    margin: 6px 4px 2px;
+    color: #2a2640
+}
+
+/* grid */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px
+}
+
+.tile {
+    background: var(--card);
+    border: 1px solid var(--divider);
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+    padding: 28px;
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    transition: .15s
+}
+
+.tile:hover {
+    background: #faf9ff;
+    box-shadow: 0 18px 44px rgba(40, 22, 90, .16)
+}
+
+.tile:active {
+    transform: translateY(1px)
+}
+
+.tile-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px
+}
+
+.tile svg {
+    width: 100px;
+    height: 100px;
+    opacity: .9
+}
+
+.tile b {
+    font-size: 24px
+}
+
+.tile small {
+    color: var(--muted);
+    font-weight: 700;
+    font-size: 18px
+}
+
+@media(max-width:720px) {
+    .grid {
+        grid-template-columns: 1fr
+    }
+
+    .tile {
+        min-height: 180px
+    }
+
+    .tile svg {
+        width: 80px;
+        height: 80px
+    }
+}
