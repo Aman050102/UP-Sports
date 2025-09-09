@@ -1,10 +1,8 @@
+# Up_SFMS/urls.py
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import include, path
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("", include("core.urls")),  # หน้าหลัก + เมนู
-    path(
-        "accounts/", include("django.contrib.auth.urls")
-    ),  # login/logout (มีชื่อ 'logout' ให้)
+    path("", include("core.urls")),   # ใช้ core เป็น root
+    path("admin/", admin.site.urls),  # ถ้าไม่ใช้ ลบได้
 ]
