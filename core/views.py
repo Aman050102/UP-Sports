@@ -41,9 +41,10 @@ def _is_pool_locked(request: HttpRequest) -> bool:
 
 
 # =============================================================================
-# หน้า Login (เป็นหน้าแรกเสมอ)
+# หน้า Login (เป็นหน้าแรกเสมอ) — เทมเพลตอยู่นอกแอป core
 # =============================================================================
-def login_page(request):
+def login_page(request: HttpRequest) -> HttpResponse:
+    # เทมเพลต: PROJECT_ROOT/templates/registration/login.html
     return render(request, "registration/login.html")
 
 
@@ -66,9 +67,7 @@ def user_menu(request: HttpRequest) -> HttpResponse:
 
 @login_required
 def choose(request: HttpRequest) -> HttpResponse:
-    """
-    หน้าเลือกสนาม: ถ้ายัง "ล็อกจากสระ" ให้บล็อกไว้ก่อน
-    """
+    """หน้าเลือกสนาม: ถ้ายังล็อกจากสระให้บล็อกก่อน"""
     if _is_pool_locked(request):
         return render(
             request,
@@ -95,9 +94,7 @@ def mock_login(request: HttpRequest) -> HttpResponse:
         defaults={"email": email, "first_name": "Student", "last_name": "One"},
     )
     login(request, user)
-
-    # เคลียร์สถานะล็อกสระทุกครั้งที่เริ่มเซสชันใหม่
-    _unlock_pool(request)
+    _unlock_pool(request)  # เคลียร์สถานะล็อกสระเมื่อเริ่มเซสชันใหม่
 
     return redirect("staff_console" if role == "staff" else "user_menu")
 
@@ -108,10 +105,10 @@ def logout_view(request: HttpRequest) -> HttpResponse:
 
 
 # =============================================================================
-# เดโมสระว่ายน้ำ (เฉพาะสระ) — ใช้เดิมไว้เผื่อทดสอบ UI
+# เดโมสระว่ายน้ำ (เฉพาะสระ) — ไว้ทดสอบ UI
 # =============================================================================
 @login_required
-@csrf_exempt
+@csrf_exempt  # ถ้าจะเปิดใช้ CSRF จริง ถอดบรรทัดนี้ และส่ง csrftoken จากฝั่ง JS
 def pool_checkin(request: HttpRequest) -> JsonResponse:
     if request.method != "POST":
         return JsonResponse({"status": "error", "message": "Invalid method"}, status=405)
@@ -150,7 +147,6 @@ def _get_post_param(request: HttpRequest, key: str) -> str:
         return val
     try:
         import json
-
         body = json.loads(request.body or b"{}")
         return (body.get(key) or "").strip()
     except Exception:
