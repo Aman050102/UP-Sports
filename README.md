@@ -1,6 +1,4 @@
 # UP-Sports (UP-SFMS)
-
-<<<<<<< Updated upstream
 **University of Phayao - Sports Facility Management System**
 =======
 **โปรเจครายวิชา Fundamental of Database System และ Software Process โดยกลุ่ม *No Name !***  
