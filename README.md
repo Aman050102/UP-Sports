@@ -3,7 +3,7 @@
 =======
 **โปรเจครายวิชา Fundamental of Database System และ Software Process โดยกลุ่ม *No Name !***  
 สาขาวิศวกรรมซอฟต์แวร์ มหาวิท-ยาลัยพะเยา ปีการศึกษา 2568**
->>>>>>> Stashed changes
+
 
 โปรเจครายวิชา _Fundamental of Database System_ และ _Software Process_  
 โดยกลุ่ม **No Name !**  

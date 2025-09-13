@@ -1,26 +1,53 @@
 {% load static %}
 <!doctype html>
 <html lang="th">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>UP-FMS · เช็คอิน</title>
+  <link rel="stylesheet" href="{% static 'assets/css/choose.css' %}">
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <div class="brand">
+        <img src="{% static 'img/logoDSASMART.png' %}" alt="DSA" class="brand-logo">
+      </div>
+    </header>
 
-    <title>{% block title %}UP-FMS{% endblock %}</title>
-    <meta name="color-scheme" content="light dark" />
+    <main>
+      <section class="card">
+        <div class="row">
+          <label for="session">วันที่ (session)</label>
+          <input id="session" type="date" inputmode="numeric" autocomplete="off">
+        </div>
+      </section>
 
-    <!-- Favicon -->
-    <link
-      rel="icon"
-      href="{% static 'img/Logo_of_University_of_Phayao.svg.png' %}"
-      type="image/png"
-    />
+      <!-- ชั้นที่ 1 -->
+      <section class="card" id="panel-top">
+        <h3 class="h3">เลือกประเภทสนาม</h3>
+        <div class="grid" id="grid-top"></div>
+      </section>
 
-    <!-- Base CSS -->
-    <link rel="stylesheet" href="{% static 'assets/css/base.css' %}" />
+      <!-- ชั้นที่ 2: เฉพาะ “สนามกลางแจ้ง” -->
+      <section class="card hidden" id="panel-outdoor">
+        <div class="toolbar">
+          <button class="btn" id="btnBack" type="button" aria-label="กลับ">&larr; กลับ</button>
+          <span class="hint">เลือกชนิดสนามกลางแจ้ง</span>
+        </div>
+        <div class="grid" id="grid-outdoor"></div>
+      </section>
+    </main>
+  </div>
 
-    {% block extra_css %}{% endblock %}
-  </head>
-  <body>
-    {% block content %}{% endblock %} {% block extra_js %}{% endblock %}
-  </body>
+  <!-- Overlay success -->
+  <div id="overlay" class="overlay" aria-live="polite">
+    <div class="card-ok">
+      <p class="ok-title">check in<br>เสร็จสิ้น</p>
+      <div class="ok-icon">✔️</div>
+    </div>
+  </div>
+
+  <script src="{% static 'js/choose.js' %}" defer></script>
+</body>
 </html>

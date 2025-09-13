@@ -1,0 +1,85 @@
+{% load static %}
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ยืม-คืนอุปกรณ์กีฬา</title>
+  <link rel="stylesheet" href="{% static 'assets/css/staff_equipment.css' %}">
+  <style>
+    body{margin:0;font-family:system-ui;background:#f6f3fc;}
+    header{background:#c7a2ea;height:56px;display:flex;align-items:center;padding:0 24px}
+    .wrap{display:grid;grid-template-columns:1fr 1fr;gap:32px;max-width:1000px;margin:40px auto;padding:0 20px}
+    .panel{background:#fff;border-radius:16px;box-shadow:0 4px 16px rgba(0,0,0,.08);padding:32px}
+    .panel h2{margin-top:0;color:#444}
+    select,input{width:100%;padding:12px;border:1px solid #ccc;border-radius:10px;font-size:16px}
+    .qty-control{display:flex;align-items:center;gap:8px;margin-top:16px}
+    .qty-btn{background:#c7a2ea;border:none;color:#fff;padding:10px 16px;border-radius:10px;font-size:18px;cursor:pointer}
+    .submit-btn{display:block;width:100%;margin-top:24px;background:#9333ea;color:#fff;font-size:18px;
+                padding:14px;border:none;border-radius:12px;cursor:pointer}
+    table{width:100%;border-collapse:collapse;margin-top:16px}
+    th,td{text-align:left;padding:10px;border-bottom:1px solid #eee}
+    th{color:#666;font-weight:600}
+  </style>
+</head>
+<body>
+  <header>
+    <h1 style="color:white;font-size:18px;">กองกิจการนิสิต · ระบบยืม-คืนอุปกรณ์กีฬา</h1>
+  </header>
+
+  <div class="wrap">
+
+    <!-- ฝั่งซ้าย -->
+    <div class="panel">
+      <h2>ทำรายการยืม/คืน</h2>
+      <form method="post">
+        {% csrf_token %}
+        <label>อุปกรณ์</label>
+        <select name="equipment">
+          <option value="บาส">บาส</option>
+          <option value="วอลเลย์บอล">วอลเลย์บอล</option>
+          <option value="ฟุตบอล">ฟุตบอล</option>
+          <option value="แบดมินตัน">แบดมินตัน</option>
+          <option value="เชือกกระโดด">เชือกกระโดด</option>
+        </select>
+
+        <div class="qty-control">
+          <label>จำนวน</label>
+          <button type="button" class="qty-btn" onclick="changeQty(-1)">−</button>
+          <input type="number" id="qty" name="qty" value="1" min="1" style="width:60px;text-align:center;">
+          <button type="button" class="qty-btn" onclick="changeQty(1)">+</button>
+        </div>
+
+        <button type="submit" class="submit-btn">ทำรายการ</button>
+      </form>
+    </div>
+
+    <!-- ฝั่งขวา -->
+    <div class="panel">
+      <h2>อุปกรณ์ที่มีในคลัง</h2>
+      <table>
+        <thead>
+          <tr><th>อุปกรณ์กีฬา</th><th>คงเหลือ</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>บาส</td><td>10</td></tr>
+          <tr><td>วอลเลย์บอล</td><td>10</td></tr>
+          <tr><td>ฟุตบอล</td><td>10</td></tr>
+          <tr><td>แบดมินตัน</td><td>10</td></tr>
+          <tr><td>เชือกกระโดด</td><td>10</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    function changeQty(delta){
+      const qty = document.getElementById('qty');
+      let val = parseInt(qty.value||1);
+      val += delta;
+      if(val<1) val=1;
+      qty.value = val;
+    }
+  </script>
+</body>
+</html>

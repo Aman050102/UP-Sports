@@ -1,0 +1,107 @@
+{% load static %}
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>ยืม-คืนอุปกรณ์กีฬา</title>
+
+  <link rel="icon" href="{% static 'img/Logo_of_University_of_Phayao.svg.png' %}" type="image/png"/>
+  <link rel="stylesheet" href="{% static 'assets/css/user_equipment.css' %}"/>
+  <script defer src="{% static 'js/user_equipment.js' %}"></script>
+</head>
+<body>
+  <!-- แถบหัว -->
+  <header class="appbar">
+    <div class="brand">
+      <img src="{% static 'img/logoDSASMART.png' %}" alt="DSA" />
+      <div class="title">
+        <div class="org">กองกิจการนิสิต</div>
+        <div class="sub">Division of Students Affairs</div>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a class="home" href="{% url 'user_menu' %}">หน้าหลัก ▾</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <!-- แถบสวิตช์โหมด -->
+    <div class="modebar" role="tablist" aria-label="เลือกรายการ">
+      <button id="btnBorrow" class="mode active" data-mode="borrow" role="tab" aria-selected="true">✓ ยืมอุปกรณ์</button>
+      <button id="btnReturn" class="mode" data-mode="return" role="tab" aria-selected="false">คืนอุปกรณ์</button>
+    </div>
+
+    <section class="grid">
+      <!-- ฝั่งซ้าย: ฟอร์ม -->
+      <div class="panel form-card">
+        <h2 class="panel-title">อุปกรณ์</h2>
+
+        <label class="field">
+          <span class="field-label">อุปกรณ์</span>
+          <div class="select-wrap">
+            <select id="equipment">
+              <option value="บาส">บาส</option>
+              <option value="วอลเลย์บอล">วอลเลย์บอล</option>
+              <option value="ฟุตบอล">ฟุตบอล</option>
+              <option value="แบดมินตัน">แบดมินตัน</option>
+              <option value="เชือกกระโดด">เชือกกระโดด</option>
+            </select>
+            <svg class="caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          </div>
+        </label>
+
+        <label class="field">
+          <span class="field-label">จำนวน</span>
+          <div class="qty">
+            <button type="button" class="qty-btn" data-delta="-1" aria-label="ลดจำนวน">−</button>
+            <input id="qty" type="number" min="1" value="1" inputmode="numeric" />
+            <button type="button" class="qty-btn" data-delta="1" aria-label="เพิ่มจำนวน">+</button>
+          </div>
+        </label>
+
+        <div class="actions">
+          <button id="submitBtn" class="primary">ทำการยืนยัน</button>
+        </div>
+      </div>
+
+      <!-- ฝั่งขวา: สต็อก -->
+      <div class="panel stock-card">
+        <div class="stock-head">
+          <div>อุปกรณ์กีฬา</div>
+          <div>คงเหลือ</div>
+        </div>
+
+        <ul class="stock-list" id="stockList" aria-live="polite">
+          <!-- demo ข้อมูลตัวอย่าง -->
+          <li><span>บาส</span><b>10</b></li>
+          <li><span>วอลเลย์บอล</span><b>10</b></li>
+          <li><span>ฟุตบอล</span><b>10</b></li>
+          <li><span>แบดมินตัน</span><b>10</b></li>
+          <li><span>เชือกกระโดด</span><b>10</b></li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="center">
+      <button id="confirmBtn" class="confirm">ทำการยืม</button>
+    </div>
+  </main>
+
+  <!-- แผ่นสำเร็จ (ยืม) -->
+  <div class="sheet" id="sheetBorrow" aria-hidden="true">
+    <div class="sheet-card">
+      <div class="sheet-title">ทำการยืม<br/>เสร็จสิ้น</div>
+      <div class="sheet-icon">✔</div>
+    </div>
+  </div>
+  <!-- แผ่นสำเร็จ (คืน) -->
+  <div class="sheet" id="sheetReturn" aria-hidden="true">
+    <div class="sheet-card">
+      <div class="sheet-title">ทำการคืน<br/>เสร็จสิ้น</div>
+      <div class="sheet-icon">✔</div>
+    </div>
+  </div>
+</body>
+</html>

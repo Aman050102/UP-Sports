@@ -1,0 +1,38 @@
+{% load static %}
+<!doctype html>
+<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ยืมอุปกรณ์</title>
+<style>
+body{font-family:system-ui;background:#f6f7fb;margin:0}
+.bar{height:56px;background:#c9a7ff;margin-bottom:16px}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px}
+.card{background:#fff;border-radius:14px;padding:20px;box-shadow:0 6px 20px rgba(0,0,0,.08)}
+input,button{padding:10px;border-radius:10px;border:1px solid #ddd}
+button.primary{background:#7c3aed;color:#fff;border:none;cursor:pointer}
+.row{display:grid;grid-template-columns:1fr 120px;gap:8px}
+.msg{margin-top:12px;padding:10px;border-radius:10px}
+.msg.success{background:#e7f8ef;color:#136d3b;border:1px solid #bfe9cf}
+.msg.error{background:#fdecea;color:#a1352d;border:1px solid #f5c2be}
+</style></head><body>
+<div class="bar"></div>
+<div class="wrap">
+  <div class="card">
+    <h3>ยืมอุปกรณ์</h3>
+    <form method="post" class="row">
+      {% csrf_token %}
+      <div>
+        <div><label>ชื่อผู้ใช้ <input name="user_name" placeholder="ไม่กรอก = guest"></label></div>
+        <div><label>อุปกรณ์ <input name="equipment" required></label></div>
+        <div><label>จำนวน <input type="number" name="qty" min="1" value="1"></label></div>
+      </div>
+      <div style="display:flex;align-items:end;"><button class="primary">ยืนยันยืม</button></div>
+    </form>
+
+    {% if messages %}
+      {% for m in messages %}
+        <div class="msg {% if m.tags %}{{ m.tags }}{% endif %}">{{ m }}</div>
+      {% endfor %}
+    {% endif %}
+  </div>
+</div>
+</body></html>
