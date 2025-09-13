@@ -1,64 +1,78 @@
-:root {
-  --brand: #8f73dd;
-  --brand-600: #7c64c2;
-  --bg: #f3f1fa;
-  --card: #fff;
-  --text: #1d1b22;
-  --muted: #6b657a;
-  --divider: #e7e3ef;
-  --shadow: 0 16px 40px rgba(40, 22, 90, .12);
+/* ===== เนื้อหา/การ์ด ===== */
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px clamp(16px, 4vw, 32px) 40px;
+  display: grid;
+  gap: 24px;
 }
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  font-family:ui-sans-serif,system-ui,-apple-system,"Noto Sans Thai",Roboto,Arial,sans-serif;
-  color:var(--text);
-  background:linear-gradient(180deg,var(--brand) 0 92px,var(--bg) 92px 100%)
+.section-title {
+  font-size: 20px;
+  font-weight: 900;
+  margin: 6px 4px 2px;
+  color: #2a2640;
 }
-/* Header */
-header.topbar{
-  height:92px;display:flex;align-items:center;justify-content:space-between;
-  padding:0 clamp(16px,4vw,32px);color:#fff;font-weight:800;
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 2fr));
+  gap: 18px;
 }
-.brand{display:flex;align-items:center;gap:12px}
-.brand-logo{height:100px;width:auto;object-fit:contain}
-.righttools{display:flex;align-items:center;gap:10px}
-.user-btn,.logout{
-  display:inline-flex;align-items:center;gap:8px;padding:10px 14px;
-  border:1px solid rgba(255,255,255,.35);border-radius:12px;background:rgba(255,255,255,.10);
-  color:#fff;text-decoration:none;
+.tile {
+  text-decoration: none;
+  color: inherit;
 }
-.user-btn:hover,.logout:hover{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.6)}
-/* Main */
-main{
-  max-width:1100px;margin:0 auto;padding:24px clamp(16px,4vw,32px) 40px;
-  display:grid;gap:24px;
+.tile-inner {
+  background: var(--card);
+  border: 1px solid var(--divider);
+  border-radius: 20px;
+  padding: 22px;
+  min-height: 140px;
+  box-shadow: var(--shadow);
+  display: grid;
+  place-items: start;
+  gap: 10px;
+  transition: 0.15s;
 }
-.section-title{font-size:20px;font-weight:900;margin:6px 4px 2px;color:#2a2640}
-/* Grid */
-.grid{display:grid;grid-template-columns:repeat(2,minmax(260px,1fr));gap:24px;}
-.tile{
-  background:var(--card);border:1px solid var(--divider);border-radius:24px;box-shadow:var(--shadow);
-  padding:28px;min-height:210px;display:flex;align-items:center;justify-content:center;text-align:center;
-  text-decoration:none;color:inherit;transition:transform .05s,box-shadow .15s,background .15s,border-color .15s;
+.tile-inner:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(40, 22, 90, 0.16);
 }
-.tile:hover{background:#faf9ff;box-shadow:0 18px 44px rgba(40,22,90,.16);border-color:#ded8f2}
-.tile:active{transform:translateY(1px)}
-.tile-inner{display:flex;flex-direction:column;align-items:center;gap:16px;max-width:90%}
-.tile svg{width:min(120px,18vw);height:min(120px,18vw);opacity:.95;}
-.tile b{font-size:24px}
-.tile small{color:var(--muted);font-weight:700}
-/* Mobile */
-@media (max-width:720px){
-  header.topbar{height:84px}
-  .brand-logo{height:46px}
-  .grid{grid-template-columns:1fr;gap:18px}
-  .tile{min-height:180px}
-  .user-btn,.logout{padding:8px 10px}
+.tile-inner svg {
+  width: 42px;
+  height: 42px;
 }
-/* Dark */
-@media (prefers-color-scheme:dark){
-  :root{--bg:#1c1728;--card:#241e33;--text:#f7f4ff;--muted:#cabfe0;--divider:#3b3250}
-  .tile:hover{background:#292243;border-color:#4a3f63}
+.tile-inner b {
+  font-size: 16px;
+}
+.tile-inner small {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .mainmenu > ul {
+    gap: 12px;
+  }
+  .submenu {
+    min-width: 280px;
+  }
+}
+@media (max-width: 640px) {
+  /* ย่อแถวบนให้สั้นลง; ผู้ใช้แตะที่หัวข้อมี dropdown เพื่อเลือกเมนูย่อย */
+  .mainmenu .toplink {
+    padding: 8px 10px;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1c1728;
+    --card: #241e33;
+    --muted: #cabfe0;
+    --divider: #3b3250;
+  }
+  body {
+    background: linear-gradient(180deg, var(--brand) 0 92px, #1c1728 92px 100%);
+  }
 }

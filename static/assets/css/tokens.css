@@ -1,0 +1,9 @@
+:root {
+  --brand: #5f5aa2;
+  --bg: #f6f3ff;
+  --text: #1d1b22;
+  --card: #ffffff;
+  --divider: #e9e4f5;
+  --muted: #6b657a;
+  --shadow: 0 16px 40px rgba(40, 22, 90, 0.12);
+}

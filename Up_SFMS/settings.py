@@ -4,7 +4,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = "dev-secret-key-change-me"
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -32,7 +32,7 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [BASE_DIR / "templates"],  # โปรเจ็กต์เทมเพลตหลัก
-        "APP_DIRS": True,                  # และ templates ในแต่ละแอป
+        "APP_DIRS": True,  # และ templates ในแต่ละแอป
         "OPTIONS": {
             "context_processors": [
                 "django.template.context_processors.debug",
