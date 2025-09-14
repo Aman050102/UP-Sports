@@ -4,18 +4,22 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <!-- Title -->
     <title>UP-FMS ยืม-คืนอุปกรณ์กีฬา</title>
 
     <!-- Favicon -->
-    <link rel="icon"
-          href="{% static 'img/Logo_of_University_of_Phayao.svg.png' %}"
-          type="image/png" />
+    <link
+      rel="icon"
+      href="{% static 'img/Logo_of_University_of_Phayao.svg.png' %}"
+      type="image/png"
+    />
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="{% static 'assets/css/global.css' %}" />
     <link rel="stylesheet" href="{% static 'assets/css/user_header.css' %}" />
-    <link rel="stylesheet" href="{% static 'assets/css/user_equipment.css' %}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'assets/css/user_equipment.css' %}"
+    />
 
     <!-- JavaScript -->
     <script defer src="{% static 'js/user_equipment.js' %}"></script>
@@ -26,8 +30,11 @@
     <!-- ===== Header ===== -->
     <header class="topbar">
       <div class="brand">
-        <img src="{% static 'img/logoDSASMART.png' %}" 
-             alt="DSA" class="brand-logo" />
+        <img
+          src="{% static 'img/logoDSASMART.png' %}"
+          alt="DSA"
+          class="brand-logo"
+        />
       </div>
 
       <nav class="mainmenu" aria-label="เมนูหลัก">
@@ -37,14 +44,33 @@
             <a href="#" class="toplink">
               บริการ
               <svg class="caret" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                <path
+                  d="M6 9l6 6 6-6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
               </svg>
             </a>
             <ul class="submenu" role="menu">
-              <li><a role="menuitem" href="{% url 'choose' %}">เช็คอินเข้าสนาม</a></li>
-              <li><a role="menuitem" id="menu-open-checkout">Check out (เฉพาะผู้ใช้สระ)</a></li>
-              <li><a role="menuitem" href="{% url 'user_equipment' %}">ยืม-คืนอุปกรณ์กีฬา</a></li>
-              <li><a role="menuitem" href="{% url 'badminton_booking' %}">จองสนามแบดมินตัน</a></li>
+              <li>
+                <a role="menuitem" href="{% url 'choose' %}">เช็คอินเข้าสนาม</a>
+              </li>
+              <li>
+                <a role="menuitem" id="menu-open-checkout"
+                  >Check out (เฉพาะผู้ใช้สระ)</a
+                >
+              </li>
+              <li>
+                <a role="menuitem" href="{% url 'user_equipment' %}"
+                  >ยืม-คืนอุปกรณ์กีฬา</a
+                >
+              </li>
+              <li>
+                <a role="menuitem" href="{% url 'badminton_booking' %}"
+                  >จองสนามแบดมินตัน</a
+                >
+              </li>
             </ul>
           </li>
         </ul>
@@ -52,9 +78,16 @@
 
       <div class="righttools">
         <span class="user-btn" aria-label="ผู้ใช้ปัจจุบัน">
-          <svg width="18" height="18" viewBox="0 0 24 24"
-               fill="none" stroke="currentColor" stroke-width="2"
-               stroke-linecap="round" stroke-linejoin="round">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
             <path d="M20 21a8 8 0 0 0-16 0" />
             <circle cx="12" cy="7" r="4" />
           </svg>
@@ -62,10 +95,22 @@
         </span>
         <form action="{% url 'logout' %}" method="post" class="logout-form">
           {% csrf_token %}
-          <button type="submit" class="logout" title="ออกจากระบบ">
-            <svg width="18" height="18" viewBox="0 0 24 24"
-                 fill="none" stroke="currentColor" stroke-width="2"
-                 stroke-linecap="round" stroke-linejoin="round">
+          <button
+            type="submit"
+            class="logout"
+            title="ออกจากระบบ"
+            aria-label="ออกจากระบบ"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
               <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
               <path d="M16 17l5-5-5-5" />
               <path d="M21 12H9" />
@@ -78,18 +123,33 @@
 
     <!-- ===== Main ===== -->
     <main class="wrap">
-      <!-- Switch mode -->
+      <!-- ตัวสลับโหมด -->
       <div class="modebar" role="tablist" aria-label="เลือกรายการ">
-        <button id="btnBorrow" class="mode active" data-mode="borrow"
-                role="tab" aria-selected="true">✓ ยืมอุปกรณ์</button>
-        <button id="btnReturn" class="mode" data-mode="return"
-                role="tab" aria-selected="false">คืนอุปกรณ์</button>
+        <button
+          id="btnBorrow"
+          class="mode active"
+          data-mode="borrow"
+          role="tab"
+          aria-selected="true"
+        >
+          ✓ ยืมอุปกรณ์
+        </button>
+        <button
+          id="btnReturn"
+          class="mode"
+          data-mode="return"
+          role="tab"
+          aria-selected="false"
+        >
+          คืนอุปกรณ์
+        </button>
       </div>
 
       <section class="grid">
-        <!-- Left: form -->
+        <!-- ฝั่งซ้าย: ฟอร์ม -->
         <div class="panel form-card">
           <h2 class="panel-title">อุปกรณ์</h2>
+
           <label class="field">
             <span class="field-label">อุปกรณ์</span>
             <div class="select-wrap">
@@ -100,31 +160,55 @@
                 <option value="แบดมินตัน">แบดมินตัน</option>
                 <option value="เชือกกระโดด">เชือกกระโดด</option>
               </select>
-              <svg class="caret" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"
-                  fill="none" stroke="currentColor" stroke-width="2"/></svg>
+              <svg class="caret" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M6 9l6 6 6-6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+              </svg>
             </div>
           </label>
 
           <label class="field">
             <span class="field-label">จำนวน</span>
             <div class="qty">
-              <button type="button" class="qty-btn" data-delta="-1">−</button>
-              <input id="qty" type="number" min="1" value="1" inputmode="numeric" />
-              <button type="button" class="qty-btn" data-delta="1">+</button>
+              <button
+                type="button"
+                class="qty-btn"
+                data-delta="-1"
+                aria-label="ลดจำนวน"
+              >
+                −
+              </button>
+              <input
+                id="qty"
+                type="number"
+                min="1"
+                value="1"
+                inputmode="numeric"
+              />
+              <button
+                type="button"
+                class="qty-btn"
+                data-delta="1"
+                aria-label="เพิ่มจำนวน"
+              >
+                +
+              </button>
             </div>
           </label>
-
-          <div class="actions">
-            <button id="submitBtn" class="primary">ทำการยืนยัน</button>
-          </div>
         </div>
 
-        <!-- Right: stock -->
+        <!-- ฝั่งขวา: สต็อก -->
         <div class="panel stock-card">
           <div class="stock-head">
-            <div>อุปกรณ์กีฬา</div><div>คงเหลือ</div>
+            <div>อุปกรณ์กีฬา</div>
+            <div>คงเหลือ</div>
           </div>
           <ul class="stock-list" id="stockList" aria-live="polite">
+            <!-- ตัวอย่างค่าเริ่มต้น (จะถูกอัปเดตด้วย JS) -->
             <li><span>บาส</span><b>10</b></li>
             <li><span>วอลเลย์บอล</span><b>10</b></li>
             <li><span>ฟุตบอล</span><b>10</b></li>
@@ -142,16 +226,21 @@
     <!-- ===== Sheets ===== -->
     <div class="sheet" id="sheetBorrow" aria-hidden="true">
       <div class="sheet-card">
-        <div class="sheet-title">ทำการยืม<br>เสร็จสิ้น</div>
+        <div class="sheet-title">ทำการยืม<br />เสร็จสิ้น</div>
         <div class="sheet-icon">✔</div>
       </div>
     </div>
 
     <div class="sheet" id="sheetReturn" aria-hidden="true">
       <div class="sheet-card">
-        <div class="sheet-title">ทำการคืน<br>เสร็จสิ้น</div>
+        <div class="sheet-title">ทำการคืน<br />เสร็จสิ้น</div>
         <div class="sheet-icon">✔</div>
       </div>
     </div>
+
+    <script>
+      window.BORROW_API = "{% url 'equip_borrow_api' %}";
+      window.RETURN_API = "{% url 'equip_return_api' %}";
+    </script>
   </body>
 </html>

@@ -1,3 +1,4 @@
+# core/urls.py
 from django.urls import path
 from . import views
 
@@ -18,6 +19,7 @@ urlpatterns = [
     path("user/", views.user_menu, name="user_menu"),
     path("choose/", views.choose, name="choose"),
     path("user/equipment/", views.user_equipment, name="user_equipment"),
+    path("user/equipment/return/", views.equipment_return_page, name="user_equipment_return"),
     path("badminton/", views.badminton_booking, name="badminton_booking"),
     path("user/borrow-stats/", views.user_borrow_stats, name="user_borrow_stats"),
 
@@ -30,6 +32,10 @@ urlpatterns = [
     path("api/borrow-return/", views.api_borrow_return, name="api_borrow_return"),
     path("api/borrow-stats/", views.api_borrow_stats, name="api_borrow_stats"),
     path("export/borrow-stats.csv", views.export_borrow_stats_csv, name="export_borrow_stats_csv"),
+
+    # ----- Equipment API (ยืม/คืนแบบอัปเดตสต็อกทันที) -----
+    path("api/equipment/borrow/", views.equip_borrow_api, name="equip_borrow_api"),
+    path("api/equipment/return/", views.equip_return_api, name="equip_return_api"),
 
     # ----- Health -----
     path("health/", views.health, name="health"),
