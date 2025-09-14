@@ -4,16 +4,13 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>UP-FMS ยืม-คืนอุปกรณ์กีฬา</title>
+    <title>ยืมอุปกรณ์กีฬา • UP-FMS</title>
 
-    <!-- Favicon -->
     <link
       rel="icon"
       href="{% static 'img/Logo_of_University_of_Phayao.svg.png' %}"
       type="image/png"
     />
-
-    <!-- Stylesheet -->
     <link rel="stylesheet" href="{% static 'assets/css/global.css' %}" />
     <link rel="stylesheet" href="{% static 'assets/css/user_header.css' %}" />
     <link
@@ -21,13 +18,12 @@
       href="{% static 'assets/css/user_equipment.css' %}"
     />
 
-    <!-- JavaScript -->
     <script defer src="{% static 'js/user_equipment.js' %}"></script>
-    <script defer src="{% static 'js/CheckOut.js' %}"></script>
   </head>
 
   <body data-page="equipment">
-    <!-- ===== Header ===== -->
+    <!-- Header -->
+    <!-- ======= ส่วนหัว ======= -->
     <header class="topbar">
       <div class="brand">
         <img
@@ -40,6 +36,7 @@
       <nav class="mainmenu" aria-label="เมนูหลัก">
         <ul>
           <li><a class="toplink" href="{% url 'user_menu' %}">หน้าหลัก</a></li>
+
           <li class="has-sub">
             <a href="#" class="toplink">
               บริการ
@@ -87,12 +84,14 @@
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
+            aria-hidden="true"
           >
             <path d="M20 21a8 8 0 0 0-16 0" />
             <circle cx="12" cy="7" r="4" />
           </svg>
           {{ display_name }}
         </span>
+
         <form action="{% url 'logout' %}" method="post" class="logout-form">
           {% csrf_token %}
           <button
@@ -110,6 +109,7 @@
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
+              aria-hidden="true"
             >
               <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
               <path d="M16 17l5-5-5-5" />
@@ -121,44 +121,37 @@
       </div>
     </header>
 
-    <!-- ===== Main ===== -->
+    <!-- Main -->
     <main class="wrap">
-      <!-- ตัวสลับโหมด -->
-      <div class="modebar" role="tablist" aria-label="เลือกรายการ">
-        <button
-          id="btnBorrow"
-          class="mode active"
-          data-mode="borrow"
-          role="tab"
-          aria-selected="true"
-        >
+      <!-- โหมด -->
+      <div class="modebar" role="tablist" aria-label="โหมด">
+        <button id="btnBorrow" class="mode active" aria-selected="true">
           ✓ ยืมอุปกรณ์
         </button>
         <button
           id="btnReturn"
           class="mode"
-          data-mode="return"
-          role="tab"
           aria-selected="false"
+          onclick="location.href='{% url 'user_equipment_return' %}'"
         >
           คืนอุปกรณ์
         </button>
       </div>
 
       <section class="grid">
-        <!-- ฝั่งซ้าย: ฟอร์ม -->
+        <!-- ฟอร์ม -->
         <div class="panel form-card">
-          <h2 class="panel-title">อุปกรณ์</h2>
+          <h2 class="panel-title">ยืมอุปกรณ์</h2>
 
           <label class="field">
             <span class="field-label">อุปกรณ์</span>
             <div class="select-wrap">
               <select id="equipment">
-                <option value="บาส">บาส</option>
-                <option value="วอลเลย์บอล">วอลเลย์บอล</option>
-                <option value="ฟุตบอล">ฟุตบอล</option>
-                <option value="แบดมินตัน">แบดมินตัน</option>
-                <option value="เชือกกระโดด">เชือกกระโดด</option>
+                {% for e in equipments %}
+                <option value="{{ e.name }}">{{ e.name }}</option>
+                {% empty %}
+                <option disabled>ยังไม่มีข้อมูลอุปกรณ์</option>
+                {% endfor %}
               </select>
               <svg class="caret" viewBox="0 0 24 24" aria-hidden="true">
                 <path
@@ -174,14 +167,7 @@
           <label class="field">
             <span class="field-label">จำนวน</span>
             <div class="qty">
-              <button
-                type="button"
-                class="qty-btn"
-                data-delta="-1"
-                aria-label="ลดจำนวน"
-              >
-                −
-              </button>
+              <button type="button" class="qty-btn" data-delta="-1">−</button>
               <input
                 id="qty"
                 type="number"
@@ -189,51 +175,36 @@
                 value="1"
                 inputmode="numeric"
               />
-              <button
-                type="button"
-                class="qty-btn"
-                data-delta="1"
-                aria-label="เพิ่มจำนวน"
-              >
-                +
-              </button>
+              <button type="button" class="qty-btn" data-delta="1">+</button>
             </div>
           </label>
+
+          <div class="center">
+            <button id="confirmBtn" class="confirm">ทำการยืม</button>
+          </div>
         </div>
 
-        <!-- ฝั่งขวา: สต็อก -->
+        <!-- สต็อก -->
         <div class="panel stock-card">
           <div class="stock-head">
             <div>อุปกรณ์กีฬา</div>
             <div>คงเหลือ</div>
           </div>
           <ul class="stock-list" id="stockList" aria-live="polite">
-            <!-- ตัวอย่างค่าเริ่มต้น (จะถูกอัปเดตด้วย JS) -->
-            <li><span>บาส</span><b>10</b></li>
-            <li><span>วอลเลย์บอล</span><b>10</b></li>
-            <li><span>ฟุตบอล</span><b>10</b></li>
-            <li><span>แบดมินตัน</span><b>10</b></li>
-            <li><span>เชือกกระโดด</span><b>10</b></li>
+            {% for e in equipments %}
+            <li><span>{{ e.name }}</span><b>{{ e.stock }}</b></li>
+            {% empty %}
+            <li><span>—</span><b>0</b></li>
+            {% endfor %}
           </ul>
         </div>
       </section>
-
-      <div class="center">
-        <button id="confirmBtn" class="confirm">ทำการยืม</button>
-      </div>
     </main>
 
-    <!-- ===== Sheets ===== -->
+    <!-- Sheets -->
     <div class="sheet" id="sheetBorrow" aria-hidden="true">
       <div class="sheet-card">
         <div class="sheet-title">ทำการยืม<br />เสร็จสิ้น</div>
-        <div class="sheet-icon">✔</div>
-      </div>
-    </div>
-
-    <div class="sheet" id="sheetReturn" aria-hidden="true">
-      <div class="sheet-card">
-        <div class="sheet-title">ทำการคืน<br />เสร็จสิ้น</div>
         <div class="sheet-icon">✔</div>
       </div>
     </div>

@@ -4,12 +4,13 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>จัดการอุปกรณ์กีฬา • UP-FMS</title>
+    <title>บันทึกการยืม-คืน • UP-FMS</title>
     <link
       rel="icon"
       href="{% static 'img/Logo_of_University_of_Phayao.svg.png' %}"
       type="image/png"
     />
+
     <link rel="stylesheet" href="{% static 'assets/css/global.css' %}" />
     <link rel="stylesheet" href="{% static 'assets/css/admin_header.css' %}" />
     <link
@@ -17,9 +18,9 @@
       href="{% static 'assets/css/staff_equipment.css' %}"
     />
 
-    <script defer src="{% static 'js/staff_equipment.js' %}"></script>
+    <script defer src="{% static 'js/staff_borrow.js' %}"></script>
   </head>
-  <body data-page="staff-equipment">
+  <body data-page="staff-ledger">
     <header class="topbar">
       <div class="brand">
         <img
@@ -152,33 +153,25 @@
           </li>
         </ul>
       </nav>
-      <h1 class="page-title">เพิ่มรายการอุปกรณ์กีฬา</h1>
+      <h1 class="page-title">รหัสนิสิตผู้ยืม</h1>
 
-      <div class="add-row">
-        <input id="equipName" type="text" placeholder="เพิ่มรายการ" />
-        <button id="btnAdd" class="btn success">
-          <span class="icon">＋</span> เพิ่ม
-        </button>
+      <div class="search-row">
+        <input id="studentId" type="text" placeholder="รหัสนิสิต" />
+        <button id="btnSearch" class="btn success">ค้นหา</button>
       </div>
 
-      <section class="panel">
-        <header class="table-head">
-          <div>อุปกรณ์กีฬา</div>
-          <div>คงเหลือ</div>
-          <div class="actions-col"></div>
+      <section class="panel table">
+        <header class="table-head grid-5">
+          <div>รหัสนิสิต</div>
+          <div>รายการ</div>
+          <div>จำนวน</div>
+          <div>วันที่ยืม</div>
+          <div>วันที่คืน</div>
         </header>
-        <ul id="equipList" class="list">
+        <ul id="borrowList" class="list list-rows">
           <!-- render ด้วย JS -->
         </ul>
       </section>
     </main>
-
-    <!-- Toast/Sheet -->
-    <div id="sheetOk" class="sheet" aria-hidden="true">
-      <div class="sheet-card">
-        <div class="sheet-title">เพิ่มรายการ<br />สำเร็จ</div>
-        <div class="sheet-icon">✔</div>
-      </div>
-    </div>
   </body>
 </html>

@@ -1,4 +1,3 @@
-# core/admin.py
 from django.contrib import admin
 from .models import Equipment, BorrowRecord, CheckinEvent
 
@@ -12,9 +11,9 @@ class EquipmentAdmin(admin.ModelAdmin):
 
 @admin.register(BorrowRecord)
 class BorrowRecordAdmin(admin.ModelAdmin):
-    list_display = ("occurred_at", "equipment", "action", "qty")
+    list_display = ("occurred_at", "equipment", "action", "qty", "student_id")
     list_filter = ("action", "occurred_at")
-    search_fields = ("equipment__name",)
+    search_fields = ("equipment__name", "student_id")
     date_hierarchy = "occurred_at"
     ordering = ("-occurred_at",)
 

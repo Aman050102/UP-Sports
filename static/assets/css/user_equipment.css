@@ -22,7 +22,7 @@ body[data-page="equipment"] {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* ===== Topbar responsive ===== */
+/* ===== Topbar responsive (โลโก้ + แถบบน ใช้ร่วมกับ user_header.css ได้) ===== */
 header.topbar {
   position: sticky;
   top: 0;
@@ -104,10 +104,10 @@ body[data-page="equipment"] .mode {
   font-weight: 800;
   min-width: 120px;
   transition:
-    background 0.2s ease,
-    transform 0.12s ease,
-    box-shadow 0.2s ease,
-    border-color 0.2s ease;
+    background 0.2s,
+    transform 0.12s,
+    box-shadow 0.2s,
+    border-color 0.2s;
 }
 body[data-page="equipment"] .mode:hover {
   background: #f6f0ff;
@@ -152,6 +152,7 @@ body[data-page="equipment"] .field-label {
   color: var(--muted);
 }
 
+/* ===== Select ===== */
 body[data-page="equipment"] .select-wrap {
   position: relative;
 }
@@ -162,10 +163,10 @@ body[data-page="equipment"] select {
   border-radius: 12px;
   background: #fff;
   font-weight: 600;
-  transition:
-    border-color 0.18s ease,
-    box-shadow 0.18s ease;
   min-height: 44px;
+  transition:
+    border-color 0.18s,
+    box-shadow 0.18s;
 }
 body[data-page="equipment"] select:hover {
   border-color: #d7cef4;
@@ -199,11 +200,11 @@ body[data-page="equipment"] .qty input {
   border: 1px solid var(--border);
   border-radius: 12px;
   font-weight: 700;
-  -moz-appearance: textfield;
   min-height: 44px;
   transition:
-    border-color 0.18s ease,
-    box-shadow 0.18s ease;
+    border-color 0.18s,
+    box-shadow 0.18s;
+  -moz-appearance: textfield;
 }
 body[data-page="equipment"] .qty input::-webkit-outer-spin-button,
 body[data-page="equipment"] .qty input::-webkit-inner-spin-button {
@@ -225,9 +226,9 @@ body[data-page="equipment"] .qty-btn {
   font-size: 22px;
   cursor: pointer;
   transition:
-    transform 0.1s ease,
-    filter 0.18s ease,
-    background 0.18s ease;
+    transform 0.1s,
+    filter 0.18s,
+    background 0.18s;
 }
 body[data-page="equipment"] .qty-btn:hover {
   filter: brightness(1.03);
@@ -273,8 +274,8 @@ body[data-page="equipment"] .stock-list li {
   border-radius: 12px;
   padding: 12px 14px;
   transition:
-    transform 0.12s ease,
-    box-shadow 0.18s ease;
+    transform 0.12s,
+    box-shadow 0.18s;
 }
 body[data-page="equipment"] .stock-list li:hover {
   transform: translateY(-1px);
@@ -284,7 +285,7 @@ body[data-page="equipment"] .stock-list li b {
   text-align: right;
 }
 
-/* ===== Button ===== */
+/* ===== Confirm button ===== */
 body[data-page="equipment"] .center {
   display: flex;
   justify-content: center;
@@ -301,9 +302,9 @@ body[data-page="equipment"] .confirm {
   min-height: 44px;
   box-shadow: 0 8px 24px rgba(124, 51, 234, 0.25);
   transition:
-    background 0.18s ease,
-    transform 0.12s ease,
-    box-shadow 0.2s ease;
+    background 0.18s,
+    transform 0.12s,
+    box-shadow 0.2s;
 }
 body[data-page="equipment"] .confirm:hover {
   box-shadow: 0 12px 28px rgba(124, 51, 234, 0.28);
@@ -317,7 +318,7 @@ body[data-page="equipment"] .confirm:focus-visible {
   outline-offset: 3px;
 }
 
-/* ===== Success Sheets ===== */
+/* ===== Success Sheet ===== */
 body[data-page="equipment"] .sheet {
   position: fixed;
   inset: 0;
@@ -327,8 +328,8 @@ body[data-page="equipment"] .sheet {
   opacity: 0;
   visibility: hidden;
   transition:
-    opacity 0.18s ease,
-    visibility 0.18s ease;
+    opacity 0.18s,
+    visibility 0.18s;
 }
 body[data-page="equipment"] .sheet[aria-hidden="false"] {
   opacity: 1;
@@ -341,7 +342,7 @@ body[data-page="equipment"] .sheet-card {
   text-align: center;
   box-shadow: var(--shadow);
   transform: scale(0.96);
-  transition: transform 0.2s ease;
+  transition: transform 0.2s;
 }
 body[data-page="equipment"] .sheet[aria-hidden="false"] .sheet-card {
   transform: scale(1);

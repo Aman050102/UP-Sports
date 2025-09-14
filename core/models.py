@@ -1,4 +1,3 @@
-# core/models.py
 from __future__ import annotations
 
 from django.conf import settings
@@ -12,24 +11,26 @@ class Equipment(models.Model):
     stock = models.PositiveIntegerField(default=0)
 
     def __str__(self) -> str:
-        return self.name
+        return f"{self.name} ({self.stock}/{self.total})"
 
 
 class BorrowRecord(models.Model):
-    ACTIONS = (
-        ("borrow", "Borrow"),
-        ("return", "Return"),
-    )
+    ACTIONS = (("borrow", "Borrow"), ("return", "Return"))
+
     equipment = models.ForeignKey(
-        Equipment, null=True, blank=True, on_delete=models.SET_NULL, related_name="records"
+        Equipment, on_delete=models.CASCADE, related_name="records"
     )
     qty = models.PositiveIntegerField(default=1)
     action = models.CharField(max_length=10, choices=ACTIONS)
     occurred_at = models.DateTimeField(default=timezone.now, db_index=True)
 
+    # ใช้โชว์ในรายงานว่าใครยืม (ถ้าไม่มี จะปล่อยว่างได้)
+    student_id = models.CharField(max_length=64, blank=True, default="")
+
     def __str__(self) -> str:
-        eq = self.equipment.name if self.equipment else "N/A"
-        return f"{self.action} {eq} x{self.qty} @ {self.occurred_at:%Y-%m-%d %H:%M}"
+        return (
+            f"{self.student_id or '-'} {self.action} {self.equipment.name} x{self.qty}"
+        )
 
 
 class CheckinEvent(models.Model):
@@ -39,10 +40,7 @@ class CheckinEvent(models.Model):
         ("pool", "Pool"),
         ("track", "Track"),
     )
-    ACTIONS = (
-        ("in", "In"),
-        ("out", "Out"),
-    )
+    ACTIONS = (("in", "In"), ("out", "Out"))
 
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL

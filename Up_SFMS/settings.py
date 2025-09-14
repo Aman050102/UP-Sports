@@ -35,7 +35,7 @@ ROOT_URLCONF = "Up_SFMS.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [BASE_DIR / "templates"],  # โปรเจ็กต์เทมเพลตหลัก
         "APP_DIRS": True,  # และ templates ในแต่ละแอป
         "OPTIONS": {
