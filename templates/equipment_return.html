@@ -121,23 +121,26 @@
       </div>
     </header>
 
+    <br> <br> <br> 
+
     <!-- Main -->
     <main class="wrap">
       <div class="modebar" role="tablist" aria-label="โหมด">
         <button
           class="mode"
           aria-selected="false"
-          onclick="location.href='{% url 'user_equipment' %}'"
+          onclick="location.href='{% url "user_equipment" %}'"
         >
           ยืมอุปกรณ์
         </button>
         <button class="mode active" aria-selected="true">✓ คืนอุปกรณ์</button>
       </div>
-
+      
       <section class="grid">
         <!-- ฟอร์ม -->
         <div class="panel form-card">
           <h2 class="panel-title">คืนอุปกรณ์</h2>
+
 
           <label class="field">
             <span class="field-label">อุปกรณ์</span>
