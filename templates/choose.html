@@ -1,7 +1,13 @@
-{% extends "layouts/basic.html" %} {% load static %} {% block title %}UP-FMS
-เช็คอิน{% endblock %} {% block extra_css %}
+{% extends "layouts/basic.html" %}
+{% load static %}
+
+{% block title %}UP-FMS เช็คอิน{% endblock %}
+
+{% block extra_css %}
 <link rel="stylesheet" href="{% static 'assets/css/choose.css' %}" />
-{% endblock %} {% block content %}
+{% endblock %}
+
+{% block content %}
 <div class="wrap">
   <header class="topbar">
     <div class="brand">
@@ -15,16 +21,11 @@
 
   <main>
     <section class="card">
-      <div class="row">
-        <label for="session">วันที่ (session)</label>
-        <input
-          id="session"
-          type="date"
-          inputmode="numeric"
-          autocomplete="off"
-        />
-      </div>
-    </section>
+  <div class="row">
+    <label for="session">วัน–เวลา (session)</label>
+    <span id="session" class="datetime"></span>
+  </div>
+</section>
 
     <!-- ชั้นที่ 1 -->
     <section class="card" id="panel-top">
@@ -52,6 +53,8 @@
     <div class="ok-icon">✔️</div>
   </div>
 </div>
-{% endblock %} {% block extra_js %}
+{% endblock %}
+
+{% block extra_js %}
 <script src="{% static 'js/choose.js' %}" defer></script>
 {% endblock %}

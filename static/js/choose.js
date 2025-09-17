@@ -17,7 +17,7 @@ const TOP = [
   { k: "pool", name: "สระว่ายน้ำ" },
 ];
 
-// สนามย่อยของ outdoor (จะบันทึกเป็น facility=outdoor และแนบ sub แค่เพื่อแสดงผล/อนาคต)
+// สนามย่อยของ outdoor
 const OUTDOOR_SUBS = [
   { k: "tennis", name: "เทนนิส" },
   { k: "basketball", name: "บาสเก็ตบอล" },
@@ -26,11 +26,29 @@ const OUTDOOR_SUBS = [
   { k: "sepak_takraw", name: "เซปักตะกร้อ" },
 ];
 
+// === format วัน–เวลาไทย (locked Asia/Bangkok) ===
+function formatNow() {
+  const currentDate = new Date();
+  return currentDate.toLocaleString("th-TH", {
+    dateStyle: "long",
+    timeStyle: "medium",
+    timeZone: "Asia/Bangkok",
+  });
+}
+
+// === clock updater ===
+function startClock() {
+  const el = $("sessionText");
+  if (!el) return;
+  const tick = () => (el.textContent = formatNow());
+  tick(); // แสดงครั้งแรกทันที
+  setInterval(tick, 1000); // อัปเดตทุกวินาที
+}
+
 // === init UI ===
 (function init() {
-  // วันที่ session (สำหรับโชว์ใน UI เฉย ๆ ตอนนี้ backend ไม่ได้ใช้)
-  const today = new Date().toISOString().slice(0, 10);
-  if ($("session")) $("session").value = today;
+  // นาฬิกา
+  startClock();
 
   // ปุ่มชั้นบน
   const gridTop = $("grid-top");
@@ -53,11 +71,12 @@ const OUTDOOR_SUBS = [
       b.className = "btn";
       b.type = "button";
       b.textContent = s.name;
-      b.onclick = () => checkin("outdoor", s.k); // บันทึกเป็น outdoor + sub
+      b.onclick = () => checkin("outdoor", s.k);
       gridOutdoor.appendChild(b);
     });
   }
 
+  // ปุ่ม back
   const backBtn = $("btnBack");
   if (backBtn) {
     backBtn.onclick = () => {
@@ -77,13 +96,11 @@ function onTopClick(f) {
 }
 
 // === core: เรียก API Django ===
-// ใช้ POST /api/check-event/ { facility, action: "in" } พร้อม CSRF
 async function checkin(facility, sub = null) {
   const csrftoken = getCookie("csrftoken");
   const body = new URLSearchParams();
   body.set("facility", facility);
   body.set("action", "in");
-  // sub ยังไม่ได้เก็บใน DB; แนบไว้เผื่ออนาคต/ดีบัก ฝั่ง backend จะเพิกเฉยเอง
   if (sub) body.set("sub", sub);
 
   try {
@@ -103,7 +120,6 @@ async function checkin(facility, sub = null) {
       throw new Error(`HTTP ${res.status}: ${txt}`);
     }
 
-    // แสดง overlay แล้วพาไปหน้าเมนูผู้ใช้
     showDone();
   } catch (err) {
     console.error("checkin failed:", err);
@@ -114,19 +130,7 @@ async function checkin(facility, sub = null) {
 function showDone() {
   const overlay = $("overlay");
   if (overlay) overlay.classList.add("show");
-
-  // เดิมคุณ redirect ไป /user_menu.html (ซึ่งไม่มี URL)
-  // ใน Django ให้พาไป path จริงคือ /user/
   setTimeout(() => {
     window.location.href = "/user/";
   }, 800);
 }
-
-/* -------------------------------------------------------
-  หมายเหตุสำคัญ
-  - endpoint ที่ถูกต้องตาม backend ปัจจุบันคือ /api/check-event/
-  - facility ที่ backend รองรับ: outdoor | badminton | pool | track
-  - ถ้าต้องการเก็บประเภทสนามย่อย (เช่น tennis, futsal)
-    ให้เพิ่ม field ใหม่ในโมเดลหรือสร้างตาราง CheckinDetail
-    แล้วปรับ view api_check_event ให้อ่านพารามิเตอร์ "sub"
--------------------------------------------------------- */
