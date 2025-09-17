@@ -115,7 +115,7 @@ def _create_event(request: HttpRequest, facility: str, action: str) -> CheckinEv
     return CheckinEvent.objects.create(
         user=request.user if request.user.is_authenticated else None,
         facility=facility,  # outdoor|badminton|pool|track
-        action=action,  # in|out
+        action=action,      # in|out
         occurred_at=timezone.now(),
     )
 
@@ -160,7 +160,8 @@ def api_check_event(request: HttpRequest) -> JsonResponse | HttpResponseBadReque
             "id": evt.id,
             "facility": evt.facility,
             "action": evt.action,
-            "ts": evt.occurred_at.isoformat(),
+            # ส่งเวลาเป็น localtime ISO ให้กราฟ/ตารางแสดงตรงเขตเวลาไทย
+            "ts": timezone.localtime(evt.occurred_at).isoformat(),
             "session_date": session_date,
         }
     )
@@ -244,7 +245,8 @@ def api_checkins(request: HttpRequest) -> JsonResponse:
         local_dt = timezone.localtime(evt.occurred_at)
         rows.append(
             {
-                "ts": evt.occurred_at.isoformat(),
+                # ให้ ts เป็น localtime (ตรงกับที่ choose/checkin_report.js ใช้แสดงผล/จัดกลุ่มชั่วโมง)
+                "ts": local_dt.isoformat(),
                 "session_date": local_dt.date().isoformat(),
                 "facility": evt.facility,
                 "action": evt.action,

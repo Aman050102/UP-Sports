@@ -6,34 +6,29 @@
     <meta charset="utf-8" />
     <!-- ทำให้หน้าเหมาะกับอุปกรณ์พกพา -->
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <!-- ชื่อหน้าเบราว์เซอร์/แท็บ -->
+    <!-- Title -->
     <title>UP-FMS รายงานผู้เข้าใช้สนาม</title>
     <!-- ให้เบราว์เซอร์รองรับทั้ง light/dark mode -->
     <meta name="color-scheme" content="light dark" />
-    <!-- ไอคอนแท็บ (favicon) โหลดจากโฟลเดอร์ static -->
+    <!-- Favicon -->
     <link
       rel="icon"
       href="{% static 'img/Logo_of_University_of_Phayao.svg.png' %}"
       type="image/png"
     />
-    <!-- Base styles (รวมสี ตัวแปร โครง layout, header, menu) -->
+    <!-- Styles Sheet -->
     <link rel="stylesheet" href="{% static 'assets/css/global.css' %}" />
     <link rel="stylesheet" href="{% static 'assets/css/admin_header.css' %}" />
     <link rel="stylesheet" href="{% static 'assets/css/menu.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/checkin_report.css' %}"/>
 
-    <!-- ไฟล์ CSS หลักของเพจรายงาน -->
-    <link
-      rel="stylesheet"
-      href="{% static 'assets/css/checkin_report.css' %}"
-    />
-
-    <!-- Chart.js สำหรับวาดกราฟ -->
+    <!-- Chart.js สำหรับวาดกรา ฟ -->
     <script
       src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"
       defer
     ></script>
 
-    <!-- ไลบรารีสำหรับ Export: Excel / PDF / DOCX -->
+    <!-- Export: Excel / PDF / DOCX -->
     <script
       src="https://cdn.jsdelivr.net/npm/xlsx@0.19.3/dist/xlsx.full.min.js"
       defer
@@ -234,7 +229,7 @@
               ><small>สระว่ายน้ำ</small></span
             >
           </div>
-        </div>
+        </div> <br/> 
 
         <!-- แถวส่วนแสดงกราฟและปุ่ม Export -->
         <div class="chart-row" id="chartRow">
