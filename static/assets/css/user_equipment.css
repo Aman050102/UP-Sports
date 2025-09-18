@@ -62,11 +62,10 @@ header.topbar {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  text-decoration: none;   /* เอาเส้นใต้ลิงก์ออก */
-  color: inherit;          /* ใช้สีตัวอักษรเดิม */
+  text-decoration: none; /* เอาเส้นใต้ลิงก์ออก */
+  color: inherit; /* ใช้สีตัวอักษรเดิม */
   cursor: pointer;
 }
-
 
 /* ===== Layout (เต็มจอ + safe-area) ===== */
 body[data-page="equipment"] .wrap {

@@ -18,13 +18,11 @@
       href="{% static 'assets/css/user_equipment.css' %}"
     />
 
-    
     <script defer src="{% static 'js/user_header.js' %}"></script>
     <script defer src="{% static 'js/user_equipment.js' %}"></script>
   </head>
 
   <body data-page="equipment">
-
     <!-- ======= ส่วนหัว ======= -->
     <header class="topbar">
       <div class="brand">
@@ -108,18 +106,22 @@
         </form>
       </div>
     </header>
-    
+
     <!-- Main -->
     <main class="wrap">
       <!-- โหมด -->
       <div class="modebar" role="tablist" aria-label="โหมด">
-  <a class="mode active" aria-current="page" href="{% url 'user_equipment' %}">
-    ✓ ยืมอุปกรณ์
-  </a>
-  <a class="mode" href="{% url 'user_equipment_return' %}">
-    คืนอุปกรณ์
-  </a>
-</div>
+        <a
+          class="mode active"
+          aria-current="page"
+          href="{% url 'user_equipment' %}"
+        >
+          ✓ ยืมอุปกรณ์
+        </a>
+        <a class="mode" href="{% url 'user_equipment_return' %}">
+          คืนอุปกรณ์
+        </a>
+      </div>
 
       <section class="grid">
         <!-- สต็อก -->

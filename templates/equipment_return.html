@@ -23,8 +23,7 @@
   </head>
 
   <body data-page="equipment">
-
-     <!-- ======= ส่วนหัว ======= -->
+    <!-- ======= ส่วนหัว ======= -->
     <header class="topbar">
       <div class="brand">
         <img
@@ -111,14 +110,16 @@
     <!-- Main -->
     <main class="wrap">
       <div class="modebar" role="tablist" aria-label="โหมด">
-  <a class="mode" href="{% url 'user_equipment' %}">
-    ยืมอุปกรณ์
-  </a>
-  <a class="mode active" aria-current="page" href="{% url 'user_equipment_return' %}">
-    ✓ คืนอุปกรณ์
-  </a>
-</div>
-      
+        <a class="mode" href="{% url 'user_equipment' %}"> ยืมอุปกรณ์ </a>
+        <a
+          class="mode active"
+          aria-current="page"
+          href="{% url 'user_equipment_return' %}"
+        >
+          ✓ คืนอุปกรณ์
+        </a>
+      </div>
+
       <section class="grid">
         <!-- สต็อก -->
         <div class="panel stock-card">
