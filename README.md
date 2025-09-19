@@ -55,6 +55,33 @@ equipment usage tracking, role-based menus, and reporting dashboards._
 
 ---
 
+# UP-Sports (UP-SFMS)
+
+ระบบจัดการสนามกีฬา + เช็คอิน/เช็คเอาต์ผ่าน QR/สแกน (Django)  
+**แยก Staff / User** + หน้า Report และเชื่อม Supabase สำหรับ Scan Check-in/Out API
+
+---
+
+## สิ่งที่ต้องมี
+- Python 3.10+ (Windows แนะนำติดตั้งจาก python.org แล้วติ๊ก "Add Python to PATH")
+- Git / หรือ GitHub Desktop
+- (ถ้าทำฟีเจอร์สแกน) Supabase project + API keys
+
+---
+
+## Quick Start (Windows)
+
+> แนะนำใช้ GitHub Desktop ก็ได้ หรือจะใช้ Git CLI ก็ได้ เลือกอย่างใดอย่างหนึ่ง
+
+### A) ใช้ GitHub Desktop
+1) **Clone** repo นี้ลงเครื่อง
+2) เปิดโฟลเดอร์โปรเจกต์ (เห็นไฟล์ `manage.py`, โฟลเดอร์ `core/`, `templates/`)
+
+### B) ใช้ Git CLI
+```powershell
+git clone https://github.com/Aman050102/UP-Sports.git
+cd UP-Sports
+
 ## Project Structure
 
 ```bash
