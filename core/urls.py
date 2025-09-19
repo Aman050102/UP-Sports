@@ -1,4 +1,5 @@
 from django.urls import path
+from . import views_supabase
 from . import views
 
 urlpatterns = [
@@ -43,4 +44,11 @@ urlpatterns = [
 
     # Health
     path("health/", views.health, name="health"),
+
+    # Supabase Scan Check-in/Out endpoints
+    path("api/checkin",          views_supabase.api_check_in,        name="api_checkin"),
+    path("api/checkout",         views_supabase.api_check_out,       name="api_checkout"),
+    path("api/admin/set-pin",    views_supabase.api_admin_set_pin,   name="api_admin_set_pin"),
+    path("api/current_presence", views_supabase.api_current_presence, name="api_current_presence"),
+
 ]
