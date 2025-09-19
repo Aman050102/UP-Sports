@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Django (dev)
+*.sqlite3
+
+# Node
+node_modules/
+
+# Secrets
+.env
