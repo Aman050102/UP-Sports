@@ -103,6 +103,11 @@ header .logo {
   opacity: 0.9;
   font-weight: 700;
 }
+.datetime {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--text);
+}
 
 /* ---------- Main layout ---------- */
 main {
@@ -253,4 +258,25 @@ input[type="date"] {
   }
 
   /* ลดโลโก้บนจอเล็ก */
+}
+/* แถว read-only สำหรับแสดงวันเวลา */
+.row.read-only {
+  align-items: center;
+}
+.row.read-only output {
+  display: inline-block;
+  padding: 12px 16px;
+  border: 1px dashed var(--divider);
+  border-radius: 14px;
+  font-weight: 800;
+  background: #fff;
+  min-height: 44px;
+}
+
+/* สีในโหมดมืด */
+@media (prefers-color-scheme: dark) {
+  .row.read-only output {
+    background: #1e1a27;
+    border-color: var(--divider);
+  }
 }

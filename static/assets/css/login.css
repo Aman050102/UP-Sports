@@ -137,7 +137,25 @@ body {
   border: 1px solid var(--divider, #ece7f3);
   border-radius: 12px;
 }
+.brand-logo {
+  height: 250px; /* ขนาดปกติ (desktop) */
+  width: auto;
+  object-fit: contain;
+}
 
+/* จอเล็ก (มือถือ ≤ 640px) */
+@media (max-width: 640px) {
+  .brand-logo {
+    height: 150px; /* ปรับโลโก้เป็น 150px บนมือถือ */
+  }
+}
+
+/* จอใหญ่มาก (≥ 1440px) */
+@media (min-width: 1440px) {
+  .brand-logo {
+    height: 300px; /* optional: ขยายอีกนิดถ้าเป็น desktop ใหญ่ */
+  }
+}
 /* ปุ่ม: ขนาดแตะ ≥ 44px เสมอ */
 .segmented [role="tab"],
 .segmented button {

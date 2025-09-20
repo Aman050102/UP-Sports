@@ -18,12 +18,11 @@
       href="{% static 'assets/css/user_equipment.css' %}"
     />
 
-     <script defer src="{% static 'js/user_header.js' %}"></script>
+    <script defer src="{% static 'js/user_header.js' %}"></script>
     <script defer src="{% static 'js/user_equipment.js' %}"></script>
   </head>
-  
+
   <body data-page="equipment">
-    <!-- Header -->
     <!-- ======= ส่วนหัว ======= -->
     <header class="topbar">
       <div class="brand">
@@ -39,37 +38,23 @@
           <li><a class="toplink" href="{% url 'user_menu' %}">หน้าหลัก</a></li>
 
           <li class="has-sub">
-            <a href="#" class="toplink">
-              บริการ
-              <svg class="caret" viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  d="M6 9l6 6 6-6"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                />
-              </svg>
-            </a>
-            <ul class="submenu" role="menu">
-              <li>
-                <a role="menuitem" href="{% url 'choose' %}">เช็คอินเข้าสนาม</a>
-              </li>
-              <li>
-                <a role="menuitem" id="menu-open-checkout"
-                  >Check out (เฉพาะผู้ใช้สระ)</a
-                >
-              </li>
-              <li>
-                <a role="menuitem" href="{% url 'user_equipment' %}"
-                  >ยืม-คืนอุปกรณ์กีฬา</a
-                >
-              </li>
-              <li>
-                <a role="menuitem" href="{% url 'badminton_booking' %}"
-                  >จองสนามแบดมินตัน</a
-                >
-              </li>
-            </ul>
+            <details>
+              <summary class="toplink">
+                บริการ
+                <svg class="caret" viewBox="0 0 24 24">
+                  <path d="M6 9l6 6 6-6" />
+                </svg>
+              </summary>
+              <ul class="submenu">
+                <li><a href="{% url 'choose' %}">เช็คอินเข้าสนาม</a></li>
+                <li>
+                  <a href="{% url 'user_equipment' %}">ยืม-คืนอุปกรณ์กีฬา</a>
+                </li>
+                <li>
+                  <a href="{% url 'badminton_booking' %}">จองสนามแบดมินตัน</a>
+                </li>
+              </ul>
+            </details>
           </li>
         </ul>
       </nav>
@@ -121,26 +106,39 @@
         </form>
       </div>
     </header>
-    <br> <br> <br> 
 
     <!-- Main -->
     <main class="wrap">
       <!-- โหมด -->
       <div class="modebar" role="tablist" aria-label="โหมด">
-        <button id="btnBorrow" class="mode active" aria-selected="true">
-          ✓ ยืมอุปกรณ์
-        </button>
-        <button
-          id="btnReturn"
-          class="mode"
-          aria-selected="false"
-          onclick="location.href='{% url 'user_equipment_return' %}'"
+        <a
+          class="mode active"
+          aria-current="page"
+          href="{% url 'user_equipment' %}"
         >
+          ✓ ยืมอุปกรณ์
+        </a>
+        <a class="mode" href="{% url 'user_equipment_return' %}">
           คืนอุปกรณ์
-        </button>
+        </a>
       </div>
 
       <section class="grid">
+        <!-- สต็อก -->
+        <div class="panel stock-card">
+          <div class="stock-head">
+            <div>อุปกรณ์กีฬา</div>
+            <div>คงเหลือ</div>
+          </div>
+          <ul class="stock-list" id="stockList" aria-live="polite">
+            {% for e in equipments %}
+            <li><span>{{ e.name }}</span><b>{{ e.stock }}</b></li>
+            {% empty %}
+            <li><span>—</span><b>0</b></li>
+            {% endfor %}
+          </ul>
+        </div>
+
         <!-- ฟอร์ม -->
         <div class="panel form-card">
           <h2 class="panel-title">ยืมอุปกรณ์</h2>
@@ -184,21 +182,6 @@
           <div class="center">
             <button id="confirmBtn" class="confirm">ทำการยืม</button>
           </div>
-        </div>
-
-        <!-- สต็อก -->
-        <div class="panel stock-card">
-          <div class="stock-head">
-            <div>อุปกรณ์กีฬา</div>
-            <div>คงเหลือ</div>
-          </div>
-          <ul class="stock-list" id="stockList" aria-live="polite">
-            {% for e in equipments %}
-            <li><span>{{ e.name }}</span><b>{{ e.stock }}</b></li>
-            {% empty %}
-            <li><span>—</span><b>0</b></li>
-            {% endfor %}
-          </ul>
         </div>
       </section>
     </main>

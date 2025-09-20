@@ -18,7 +18,9 @@
   margin: 24px auto;
   padding: 0 18px;
 }
-.wrap.narrower { max-width: 900px; }
+.wrap.narrower {
+  max-width: 900px;
+}
 
 .page-title {
   margin: 12px 0 14px;
@@ -53,8 +55,13 @@
   cursor: pointer;
   font-weight: 900;
 }
-.btn.success { background: #b1f4a6; }  /* ปุ่มยืนยันสีเขียวอ่อน */
-.btn .icon { font-weight: 900; margin-right: 6px; }
+.btn.success {
+  background: #b1f4a6;
+} /* ปุ่มยืนยันสีเขียวอ่อน */
+.btn .icon {
+  font-weight: 900;
+  margin-right: 6px;
+}
 
 /* =========================================================
    PANELS & TABLE HEADERS
@@ -121,7 +128,9 @@
   cursor: pointer;
   font-size: 16px;
 }
-.icon-btn.danger { background: #ffe2e2; } /* ปุ่มลบสีแดงอ่อน */
+.icon-btn.danger {
+  background: #ffe2e2;
+} /* ปุ่มลบสีแดงอ่อน */
 
 /* inline edit ของคอลัมน์สต็อก */
 .inline-edit {

@@ -38,37 +38,23 @@
           <li><a class="toplink" href="{% url 'user_menu' %}">หน้าหลัก</a></li>
 
           <li class="has-sub">
-            <a href="#" class="toplink">
-              บริการ
-              <svg class="caret" viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  d="M6 9l6 6 6-6"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                />
-              </svg>
-            </a>
-            <ul class="submenu" role="menu">
-              <li>
-                <a role="menuitem" href="{% url 'choose' %}">เช็คอินเข้าสนาม</a>
-              </li>
-              <li>
-                <a role="menuitem" id="menu-open-checkout"
-                  >Check out (เฉพาะผู้ใช้สระ)</a
-                >
-              </li>
-              <li>
-                <a role="menuitem" href="{% url 'user_equipment' %}"
-                  >ยืม-คืนอุปกรณ์กีฬา</a
-                >
-              </li>
-              <li>
-                <a role="menuitem" href="{% url 'badminton_booking' %}"
-                  >จองสนามแบดมินตัน</a
-                >
-              </li>
-            </ul>
+            <details>
+              <summary class="toplink">
+                บริการ
+                <svg class="caret" viewBox="0 0 24 24">
+                  <path d="M6 9l6 6 6-6" />
+                </svg>
+              </summary>
+              <ul class="submenu">
+                <li><a href="{% url 'choose' %}">เช็คอินเข้าสนาม</a></li>
+                <li>
+                  <a href="{% url 'user_equipment' %}">ยืม-คืนอุปกรณ์กีฬา</a>
+                </li>
+                <li>
+                  <a href="{% url 'badminton_booking' %}">จองสนามแบดมินตัน</a>
+                </li>
+              </ul>
+            </details>
           </li>
         </ul>
       </nav>
@@ -121,27 +107,38 @@
       </div>
     </header>
 
-    <br> <br> <br> 
-
     <!-- Main -->
     <main class="wrap">
       <div class="modebar" role="tablist" aria-label="โหมด">
-        <button
-          class="mode"
-          aria-selected="false"
-          onclick="location.href='{% url "user_equipment" %}'"
+        <a class="mode" href="{% url 'user_equipment' %}"> ยืมอุปกรณ์ </a>
+        <a
+          class="mode active"
+          aria-current="page"
+          href="{% url 'user_equipment_return' %}"
         >
-          ยืมอุปกรณ์
-        </button>
-        <button class="mode active" aria-selected="true">✓ คืนอุปกรณ์</button>
+          ✓ คืนอุปกรณ์
+        </a>
       </div>
-      
+
       <section class="grid">
+        <!-- สต็อก -->
+        <div class="panel stock-card">
+          <div class="stock-head">
+            <div>อุปกรณ์กีฬา</div>
+            <div>คงเหลือ</div>
+          </div>
+          <ul class="stock-list" id="stockList">
+            {% for e in equipments %}
+            <li><span>{{ e.name }}</span><b>{{ e.stock }}</b></li>
+            {% empty %}
+            <li><span>—</span><b>0</b></li>
+            {% endfor %}
+          </ul>
+        </div>
+
         <!-- ฟอร์ม -->
         <div class="panel form-card">
           <h2 class="panel-title">คืนอุปกรณ์</h2>
-
-
           <label class="field">
             <span class="field-label">อุปกรณ์</span>
             <div class="select-wrap">
@@ -182,28 +179,13 @@
             <button id="btnReturnConfirm" class="primary">ทำการคืน</button>
           </div>
         </div>
-
-        <!-- สต็อก -->
-        <div class="panel stock-card">
-          <div class="stock-head">
-            <div>อุปกรณ์กีฬา</div>
-            <div>คงเหลือ</div>
-          </div>
-          <ul class="stock-list" id="stockList">
-            {% for e in equipments %}
-            <li><span>{{ e.name }}</span><b>{{ e.stock }}</b></li>
-            {% empty %}
-            <li><span>—</span><b>0</b></li>
-            {% endfor %}
-          </ul>
-        </div>
       </section>
     </main>
 
     <!-- Sheets -->
     <div class="sheet" id="sheetBorrow" aria-hidden="true">
       <div class="sheet-card">
-        <div class="sheet-title">ทำการยืม<br />เสร็จสิ้น</div>
+        <div class="sheet-title">ทำการคืน<br />เสร็จสิ้น</div>
         <div class="sheet-icon">✔</div>
       </div>
     </div>
